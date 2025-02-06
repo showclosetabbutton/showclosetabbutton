@@ -1,15 +1,20 @@
 {
-  "manifest_version": 3,
-  "name": "Custom Web Buttons",
-  "version": "1.0",
-  "description": "在 active tab 的網頁中顯示使用者選擇的按鈕，並能自訂排列方式與位置。",
+  "manifest_version": 2,
+  "name": "Show Close Tab Button",
+  "version": "1.1",
+  "description": "Show a close button on each active tab to close it. And you can add buttons and set the arrangement and position of buttons yourself.",
   "permissions": ["storage", "activeTab", "scripting","tabs"],
-  "host_permissions": ["<all_urls>"],
-  "action": {
-    "default_popup": "popup.html"
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent":true
   },
   "content_scripts": [
     {
@@ -17,10 +22,21 @@
       "js": ["content.js"]
     }
   ],
-"web_accessible_resources": [{
-  "resources": ["icons/*.png"],
-  "matches": ["<all_urls>"]
-}]
+"web_accessible_resources": [
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+],
+  "icons": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+  },
+  "browser_specific_settings": {
+      "gecko":{ 
+      "id": "showclosetabbutton@github.io"
+      }
+  }
   
 }
 
