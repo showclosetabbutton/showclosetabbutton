@@ -99,7 +99,9 @@ Show Close Tab Button is an open-source MIT-licensed browser extension designed 
 
 Show Close Tab Button doesn't show ads and doesn't send user's data.
 
-<img src="images/show-close-tab-button-v1.1-screenshot.png" alt="screenshot">
+<img src="images/show-close-tab-button-v1.1-screenshot.png" alt="settings-screenshot">
+<img src="images/screenshot4.png" alt="web-screenshot">
+
 <p>The developer of this add-on kindly invites you to support its ongoing development by considering a small contribution.<a href="https://paypal.me/zhihaushiu">♥ Contribute</a>)</p>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
