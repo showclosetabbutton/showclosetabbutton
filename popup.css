@@ -1,0 +1,169 @@
+/* 讓所有元素採用 border-box 模型，方便控制間距 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #733708;
+  /* 最大寬度設定，並以百分比自適應 
+  max-width: 350px;
+  width: 100%;
+  padding: 10px;*/
+  margin: 0 auto;
+      font-size: medium;
+      font-family: Arial, sans-serif;
+
+}
+
+/* controls 區塊排版 */
+.controls {
+  background-color: #733708;
+  color: #e9785f;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
+  padding: 10px;
+}
+
+select,
+button {
+  font-size: 1em;
+  padding: 8px;
+}
+
+#button-list {
+  list-style-type: none;
+  background-color: #1a655c;
+  color: white;
+  padding: 20px;
+  margin: 0;
+}
+
+#button-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+#button-list span{
+  padding: 5px 10px;
+  background-color: rgba(234, 197, 100, 1);
+  color: rgba(50, 30, 10, 1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#button-list span:hover {
+  background-color: rgba(244, 217, 130, 1);
+}
+
+
+/* 讓下拉選單自動填滿剩餘空間 */
+#button-select {
+  flex: 1;
+  margin-right: 5px;  /* 可調整間距 */
+}
+
+/* 保持 add-button 固定大小 */
+#add-button {
+  flex-shrink: 0;
+}
+
+button {
+  padding: 10px;
+  background-color: rgba(234, 197, 100, 1);
+  color: rgba(50, 30, 10, 1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(244, 217, 130, 1);
+}
+
+
+/* 清單樣式 */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  cursor: grab;
+  background-color: #fff;
+}
+
+/* settings 區塊樣式 */
+.settings {
+  margin-top: 10px;
+  background-color: #733708;
+  color: #e9785f;
+padding: 10px;
+}
+
+.settings h3 {
+  font-size: 1.1em;
+  margin: 0px 0 5px;
+}
+
+/* settings 區塊內的 apply 按鈕寬度調整 */
+.settings #apply-button {
+  width: 100%;
+  box-sizing: border-box; /* 確保 padding 不影響寬度 */
+  margin-top: 10px;       /* 可依需求調整間距 */
+}
+
+/* radio group 置中且彈性排列 */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.radio-group label {
+  font-size: 0.9em;
+}
+
+/* 針對手機尺寸調整 */
+@media (max-width: 480px) {
+  body {
+    /*padding: 5px;*/
+  }
+  
+  select,
+  button {
+    font-size: 0.9em;
+    padding: 6px;
+  }
+  
+  li {
+    font-size: 0.9em;
+  }
+  
+  .settings h3 {
+    font-size: 1em;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+

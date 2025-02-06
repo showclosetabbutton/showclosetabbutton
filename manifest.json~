@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Custom Web Buttons",
+  "version": "1.0",
+  "description": "在 active tab 的網頁中顯示使用者選擇的按鈕，並能自訂排列方式與位置。",
+  "permissions": ["storage", "activeTab", "scripting","tabs"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+"web_accessible_resources": [{
+  "resources": ["icons/*.png"],
+  "matches": ["<all_urls>"]
+}]
+  
+}
+
