@@ -12,9 +12,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonText['pocket'] = {icon:"➕",desp:"Pocket Button"};
     buttonText['home'] = {icon:"H",desp:"Home Button"};
     buttonText['duplicate-tab'] = {icon:"D",desp:"Duplicate Tab Button"};
+    buttonText['scroll-to-top'] = {icon:"D",desp:"Scroll To Top Button"};
+    buttonText['page-up'] = {icon:"D",desp:"Page Up Button"};
+    buttonText['page-down'] = {icon:"D",desp:"Page Down Button"};
+    buttonText['scroll-to-bottom'] = {icon:"D",desp:"Scroll To Bottom Button"};
+	//@2.add new button infomation
 	console.log(buttonText);
 
-    // 讀取 local storage
+    // read local storage
     let storedButtons = await browser.storage.local.get("buttons");
     let buttons = storedButtons.buttons || ["close"];
 	console.log('org buttons<<<<');

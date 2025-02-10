@@ -16,6 +16,10 @@ function injectButtons(buttons, position, layout) {
     buttonText['pocket'] ='/icons/pocket-128.png';
     buttonText['home'] ='/icons/home-128.png';
     buttonText['duplicate-tab'] ='/icons/duplicate-tab-128.png';
+    buttonText['scroll-to-top'] ='/icons/scroll-to-top-128.png';
+    buttonText['page-up'] ='/icons/page-up-128.png';
+    buttonText['page-down'] ='/icons/page-down-128.png';
+    buttonText['scroll-to-bottom'] ='/icons/scroll-to-bottom-128.png';
 	//@3.add new button icon path
 
     const container = document.createElement("div");
@@ -76,6 +80,32 @@ function injectButtons(buttons, position, layout) {
                  // save page to pocket
     const pocketUrl = "https://getpocket.com/save?url=" + encodeURIComponent(window.location.href) + "&title=" + encodeURIComponent(document.title);
     window.open(pocketUrl, '_blank', 'width=550,height=420');
+            });
+        }
+	    else if (btn === "scroll-to-top") {
+            button.addEventListener("click", () => {
+		 window.scrollTo({
+		    top: 0,
+		    behavior: "smooth"
+		  });
+		});
+        }
+	    else if (btn === "page-up") {
+            button.addEventListener("click", () => {
+		 window.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
+            });
+        }
+	    else if (btn === "page-down") {
+            button.addEventListener("click", () => {
+                 window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+            });
+        }
+	    else if (btn === "scroll-to-bottom") {
+            button.addEventListener("click", () => {
+		window.scrollTo({
+		  top: document.body.scrollHeight,
+		  behavior: "smooth"
+		});
             });
         }
         container.appendChild(button);

@@ -14,11 +14,13 @@
       <option value="pocket">Pocket Button</option>
       <option value="home">Home Button</option>
       <option value="duplicate-tab">Duplicate Tab Button</option>
+      <!--@1. add new button-->
     </select>
     <button id="add-button">&#10133;</button>
   </div>
   <p id="message"></p>
   <ul id="button-list">
+	  <!--for test ui-->
 	  <!-- <li value='aa' draggable='true'>Close Button<span style='cursor:pointer'>❌</span></li>-->
   </ul>
   

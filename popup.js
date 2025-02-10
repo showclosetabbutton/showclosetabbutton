@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     buttonText['pocket'] = {icon:"➕",desp:"Pocket Button"};
     buttonText['home'] = {icon:"H",desp:"Home Button"};
     buttonText['duplicate-tab'] = {icon:"D",desp:"Duplicate Tab Button"};
+    buttonText['scroll-to-top'] = {icon:"D",desp:"Scroll To Top Button"};
+    buttonText['page-up'] = {icon:"D",desp:"Page Up Button"};
+    buttonText['page-down'] = {icon:"D",desp:"Page Down Button"};
+    buttonText['scroll-to-bottom'] = {icon:"D",desp:"Scroll To Bottom Button"};
 	//@2.add new button infomation
 	console.log(buttonText);
 
@@ -191,12 +195,12 @@ const getDragAfterElement = (
     }
 
     addButton.addEventListener("click", () => {
-        if (buttons.length >= 5) {
+/*        if (buttons.length >= 5) {
             messageElement.innerText="The button limit has been exceeded and no new buttons can be added. Please remove other buttons and try again.";
-            messageElement.style.color= "red";
+            messageElement.style.color= "red";*/
 //            alert("已超過按鈕上限無法新增，請移除其他按鈕再重試");
-            return;
-        }
+/*            return;
+        }*/
         let selected = buttonSelect.value;
         if (buttons.includes(selected)) {
             messageElement.innerText="This button already exists in the list and cannot be added.";
