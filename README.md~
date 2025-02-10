@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 <!--
@@ -90,13 +91,18 @@ Show a close button on each active tab to close it
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Show Close Tab Button is an open-source MIT-licensed browser extension designed to show a close button on each active tab to close it. You can close the current tab with a simple click of a button.It doesn't show ads and doesn't send user's data. 
+Show Close Tab Button is an open-source MIT-licensed browser extension designed to show a close button or some useful buttons on each active tab. And you can add buttons and set the arrangement and position of buttons yourself.
+- Close Tab Button: You can close the current tab with a simple click of a button.
+- Pocket Button: You can save web pages to your pocket with the click of a button without going through layers of menus.
+- Home Button: If there is no Home button on the page, you can simply click this button to return to the home page.
+- Duplicate Tab Button: Clicking this button will copy the current tab.
 
-[![Product Name Screen Shot][product-screenshot]](https://showclosetabbutton.github.io)
+Show Close Tab Button doesn't show ads and doesn't send user's data.
 
+<img src="images/show-close-tab-button-v1.1-screenshot.png" alt="settings-screenshot">
+<img src="images/screenshot4.png" alt="web-screenshot">
 
-<img src="images/screenshot.png" alt="Logo">
+<p>The developer of this add-on kindly invites you to support its ongoing development by considering a small contribution.<a href="https://paypal.me/zhihaushiu">♥ Contribute</a>)</p>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
