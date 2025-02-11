@@ -77,36 +77,52 @@ function injectButtons(buttons, position, layout) {
         }
 	    else if (btn === "pocket") {
             button.addEventListener("click", () => {
-                 // save page to pocket
-    const pocketUrl = "https://getpocket.com/save?url=" + encodeURIComponent(window.location.href) + "&title=" + encodeURIComponent(document.title);
+            	// save page to pocket
+            	const pocketUrl = "https://getpocket.com/save?url=" + encodeURIComponent(window.location.href) + "&title=" + encodeURIComponent(document.title);
     window.open(pocketUrl, '_blank', 'width=550,height=420');
             });
         }
 	    else if (btn === "scroll-to-top") {
             button.addEventListener("click", () => {
-		 window.scrollTo({
-		    top: 0,
-		    behavior: "smooth"
-		  });
-		}
-            });
-    }
+		 if(isPageScrollable()){
+			window.scrollTo({
+			    top: 0,
+			    behavior: "smooth"
+			});
+		 }else{
+			scrollLargestDivTo("Top");
+		 }
+		});
+        }
 	    else if (btn === "page-up") {
             button.addEventListener("click", () => {
-		 window.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
+		 if(isPageScrollable()){
+                 	window.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
+		 }else{
+			scrollLargestDivTo("Up");
+		 }
             });
         }
 	    else if (btn === "page-down") {
             button.addEventListener("click", () => {
-                 window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+		 if(isPageScrollable()){
+                 	window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+		 }else{
+			scrollLargestDivTo("Down");
+		 }
             });
         }
 	    else if (btn === "scroll-to-bottom") {
             button.addEventListener("click", () => {
-		window.scrollTo({
-		  top: document.body.scrollHeight,
-		  behavior: "smooth"
-		});
+		 if(isPageScrollable()){
+			window.scrollTo({
+			  top: document.body.scrollHeight,
+			  behavior: "smooth"
+			});
+		 }
+		 else{
+			scrollLargestDivTo("Bottom");
+		 }
             });
         }
         container.appendChild(button);
@@ -114,6 +130,61 @@ function injectButtons(buttons, position, layout) {
     
     document.body.appendChild(container);
 }
+
+function scrollLargestDivTo(direction) {
+	let largestDiv=null;
+	if(window.location.href.indexOf("perplexity.ai")>-1){
+		largestDiv=document.getElementsByClassName("scrollable-container")[0];
+	}else{
+		// 取得所有 div 元素
+		  const divs = Array.from(document.querySelectorAll("div"));
+
+		  // 過濾出 scrollHeight 大於 clientHeight 的可滾動 div
+		  const scrollableDivs = divs.filter(div => div.scrollHeight > div.clientHeight);
+
+		  if (scrollableDivs.length === 0) {
+		    console.log("沒有可滾動的 div，滾動整個頁面");
+		    window.scrollTo({
+		      top: 0,
+		      behavior: 'smooth'
+		    });
+		    return;
+		  }
+
+		  // 從可滾動的 div 中找出佔畫面最大的 div（以面積作為判斷依據）
+		  largestDiv = scrollableDivs.reduce((maxDiv, currentDiv) => {
+		    const currentRect = currentDiv.getBoundingClientRect();
+		    const maxRect = maxDiv.getBoundingClientRect();
+		    const currentArea = currentRect.width * currentRect.height;
+		    const maxArea = maxRect.width * maxRect.height;
+		    return currentArea > maxArea ? currentDiv : maxDiv;
+		  }, scrollableDivs[0]);
+	}
+	console.log("Largest scrollable div:", largestDiv);
+	if(largestDiv){
+		if(direction=="Top"){
+			  largestDiv.scrollTo({
+			    top: 0,
+			    behavior: 'smooth'
+			  });
+		}else if(direction=="Up"){
+			  largestDiv.scrollBy({ top: -largestDiv.clientHeight, behavior: "smooth" });
+		}else if(direction=="Down"){
+			  largestDiv.scrollBy({ top: largestDiv.clientHeight, behavior: "smooth" });
+		}else{//Bottom
+			  largestDiv.scrollTo({
+				  top:largestDiv.scrollHeight - largestDiv.clientHeight,
+				  behavior: 'smooth'
+			  });
+		}
+	}
+}
+
+function isPageScrollable() {
+  // 如果整個頁面的 scrollHeight 大於視窗高度，表示頁面可翻頁
+  return document.documentElement.scrollHeight > window.innerHeight;
+}
+
 
 function updateButtonsFromStorage() {
     browser.storage.local.get(["buttons", "position", "layout"]).then((data) => {

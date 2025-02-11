@@ -101,6 +101,8 @@ Show Close Tab Button is an open-source MIT-licensed browser extension designed 
 - Page Down Button:Press this button to scroll down a page.
 - Scroll to Bottom Button:Press this button to go to the bottom of the page.
 
+Scroll to Top/Bottom Button and Page Up/Down Button support entire web page and AI chatbot (chatgpt, perplexity.ai, copilot, claud.ai for desktop) conversation page.
+
 Show Close Tab Button doesn't show ads and doesn't send user's data.
 
 <img src="images/show-close-tab-button-v1.1-screenshot.png" alt="settings-screenshot">

@@ -96,6 +96,10 @@ Show Close Tab Button is an open-source MIT-licensed browser extension designed 
 - Pocket Button: You can save web pages to your pocket with the click of a button without going through layers of menus.
 - Home Button: If there is no Home button on the page, you can simply click this button to return to the home page.
 - Duplicate Tab Button: Clicking this button will copy the current tab.
+- Scroll to Top Button:Press this button to go to the top of the page.
+- Page Up Button:Press this button to scroll up a page.
+- Page Down Button:Press this button to scroll down a page.
+- Scroll to Bottom Button:Press this button to go to the bottom of the page.
 
 Show Close Tab Button doesn't show ads and doesn't send user's data.
 
