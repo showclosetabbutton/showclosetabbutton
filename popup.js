@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const addButton = document.getElementById("add-button");
     const buttonList = document.getElementById("button-list");
     const applyButton = document.getElementById("apply-button");
+    const helpButton= document.getElementById("help-button");
+    const donateButton= document.getElementById("donate-button");
 
     const positionRadios = document.querySelectorAll("input[name='position']");
     const layoutRadios = document.querySelectorAll("input[name='layout']");
@@ -19,14 +21,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 	//@2.add new button infomation
 	console.log(buttonText);
 
-    // read local storage
-    let storedButtons = await browser.storage.local.get("buttons");
+    // read sync storage
+    let storedButtons = await browser.storage.sync.get("buttons");
     let buttons = storedButtons.buttons || ["close"];
 	console.log('org buttons<<<<');
 	console.log(buttons);
 	console.log('org buttons>>>>');
 
-    let storedSettings = await browser.storage.local.get(["position", "layout"]);
+    let storedSettings = await browser.storage.sync.get(["position", "layout"]);
     let position = storedSettings.position || "top-right";
     let layout = storedSettings.layout || "vertical";
 
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             deleteIcon.style.cursor = "pointer";
             deleteIcon.addEventListener("click", () => {
                 buttons = buttons.filter((b) => b !== btn);
-                browser.storage.local.set({ buttons });
+                browser.storage.sync.set({ buttons });
                 renderButtons();
             });
 
@@ -84,7 +86,7 @@ buttonList.addEventListener(
             draggedItem = null;
         }, 0);
 
-//        browser.storage.local.set({ buttons });
+//        browser.storage.sync.set({ buttons });
 });
 buttonList.addEventListener(
     "drop",
@@ -122,7 +124,7 @@ buttonList.addEventListener(
         item.dataset.index = index;
       });
     }
-   // 更新排序結果並存入 local storage
+   // 更新排序結果並存入 sync storage
     function updateLocalStorage() {
 	    console.log('updateLocalStorage----');
 	    console.log(buttonList.children);
@@ -134,8 +136,8 @@ buttonList.addEventListener(
       buttons = Array.from(buttonList.children).map(item => item.getAttribute('value').trim());
       //const sortedItems = Array.from(list.children).map(item => item.textContent.trim());
       //localStorage.setItem('sortedList', JSON.stringify(sortedItems));
-        browser.storage.local.set({ buttons });
-      console.log("排序後結果存入 local storage：", buttons);
+        //browser.storage.sync.set({ buttons });
+      console.log("排序後結果存入 sync storage：", buttons);
     }
 
 buttonList.addEventListener(
@@ -209,14 +211,14 @@ const getDragAfterElement = (
             return;
         }
         buttons.push(selected);
-        browser.storage.local.set({ buttons });
+        browser.storage.sync.set({ buttons });
         renderButtons();
     });
 
     positionRadios.forEach((radio) => {
         radio.addEventListener("change", () => {
             position = radio.value;
-            browser.storage.local.set({ position });
+            browser.storage.sync.set({ position });
         });
         if (radio.value === position) radio.checked = true;
     });
@@ -224,12 +226,14 @@ const getDragAfterElement = (
     layoutRadios.forEach((radio) => {
         radio.addEventListener("change", () => {
             layout = radio.value;
-            browser.storage.local.set({ layout });
+            browser.storage.sync.set({ layout });
         });
         if (radio.value === layout) radio.checked = true;
     });
 
     applyButton.addEventListener("click", async () => {
+	    console.log('apply...');
+	    console.log(browser.storage.sync.get());
         let tabs = await browser.tabs.query({ active: true, currentWindow: true });
         if (tabs.length > 0) {
             browser.scripting.executeScript({
@@ -243,6 +247,24 @@ const getDragAfterElement = (
 	    window.close();
     });
 
+helpButton.addEventListener('click', function() {
+	openUrl('https://showclosetabbutton.github.io/help.html');
+});
+
+function openUrl(_url) {
+    browser.runtime.sendMessage({ action: "open_url", url: _url })
+        .then(response => {
+            console.log("Message sent, response:", response);
+		window.close();
+        })
+        .catch(error => {
+            console.error("Error sending message:", error);
+        });
+};
+
+donateButton.addEventListener('click', function() {
+    openUrl('https://paypal.me/zhihaushiu');
+});
 
     renderButtons();
 });

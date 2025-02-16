@@ -1,9 +1,16 @@
 {
   "manifest_version": 2,
   "name": "Show Close Tab Button",
-  "version": "1.5.2",
+  "version": "1.6.2",
   "description": "Show a close button on each active tab to close it. And you can add buttons and set the arrangement and position of buttons yourself.",
-  "permissions": ["storage", "activeTab", "scripting","tabs"],
+  "permissions": [
+	  "storage", 
+	  "activeTab", 
+	  "scripting",
+	  "tabs",
+	  "http://*/*",
+	  "https://*/*"
+  ],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {

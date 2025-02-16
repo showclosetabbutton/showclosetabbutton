@@ -128,6 +128,14 @@ padding: 10px;
   box-sizing: border-box; /* 確保 padding 不影響寬度 */
   margin-top: 10px;       /* 可依需求調整間距 */
 }
+.settings .other-button {
+  width: 100%;
+  box-sizing: border-box; /* 確保 padding 不影響寬度 */
+  margin-top: 10px;       /* 可依需求調整間距 */
+  background: #733708;
+  border: 1px solid rgb(234, 197, 100);
+  color: rgb(234, 197, 100);
+}
 
 /* radio group 置中且彈性排列 */
 .radio-group {

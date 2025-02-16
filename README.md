@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 <!--
@@ -41,7 +40,7 @@
 Show a close button on each active tab to close it
 <!--
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>FIREFOX</strong></a>
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Show Close Tab Button for Firefox</strong></a>
 -->
     <br />
     <br />

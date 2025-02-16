@@ -50,7 +50,7 @@ button {
   border-radius: 5px;
 }
 
-#button-list button{
+#button-list span{
   padding: 5px 10px;
   background-color: rgba(234, 197, 100, 1);
   color: rgba(50, 30, 10, 1);
@@ -60,7 +60,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-#button-list button:hover {
+#button-list span:hover {
   background-color: rgba(244, 217, 130, 1);
 }
 

@@ -1,12 +1,22 @@
 // background.js - 處理 popup.js 與 content.js 之間的通訊
 
 browser.runtime.onInstalled.addListener(() => {
-    browser.storage.local.set({
+    browser.storage.sync.set({
         buttons: ["close"],
         position: "top-right",
         layout: "vertical"
     });
 });
+
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  // 檢查該 tab 是否加載完畢（status: 'complete'），且 URL 包含指定字串
+  if (changeInfo.status === 'complete' && tab.url && tab.url.includes('https://getpocket.com/edit') && tab.url.includes('&tags=')) {
+    // 自動關閉該視窗
+    chrome.tabs.remove(tabId);
+  }
+});
+
 
 browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     if (message.action === "applySettings") {
@@ -90,5 +100,10 @@ browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 	    console.log('current tab is null');
 	}
     }//@4. add button click event
+    else if (message.action === "open_url") {
+        browser.tabs.create({ url: message.url }); // 在新標籤頁開啟 URL
+        sendResponse({ status: "URL opened" });
+    }
 });
+
 

@@ -1,6 +1,10 @@
 // content.js - 在 active tab 的網頁中顯示按鈕並處理行為
 
 function injectButtons(buttons, position, layout) {
+	console.log('injectButtons...');
+	console.log(buttons);
+	console.log(position);
+	console.log(layout);
     // 若 container 已存在則先移除（避免重複注入）
     const existing = document.getElementById("custom-button-container");
     if (existing) {
@@ -40,6 +44,7 @@ function injectButtons(buttons, position, layout) {
     Object.assign(container.style, positions[position]);
     
     buttons.forEach((btn) => {
+	    console.log('load button: '+btn);
         const button = document.createElement("button");
         //button.textContent = buttonText[btn];//btn === "close" ? "✖" : "➕";
 	const url=browser.runtime.getURL(buttonText[btn]);
@@ -56,7 +61,7 @@ function injectButtons(buttons, position, layout) {
         button.style.padding = "5px";
         button.style.fontSize = "16px";
         button.style.cursor = "pointer";
-	    console.log(button);
+	console.log(button);
         if (btn === "close") {
             button.addEventListener("click", () => {
                 // close tab via background.js , not use window.close()
@@ -78,8 +83,10 @@ function injectButtons(buttons, position, layout) {
 	    else if (btn === "pocket") {
             button.addEventListener("click", () => {
             	// save page to pocket
-            	const pocketUrl = "https://getpocket.com/save?url=" + encodeURIComponent(window.location.href) + "&title=" + encodeURIComponent(document.title);
-    window.open(pocketUrl, '_blank', 'width=550,height=420');
+            	const pocketUrl = "https://getpocket.com/edit?url=" + encodeURIComponent(window.location.href) + "&title=" + encodeURIComponent(document.title);
+		    console.log(pocketUrl);
+ 		const newWindow = window.open(pocketUrl, '_blank', 'width=550,height=420');
+		    //autoClosePocketWindow(newWindow);
             });
         }
 	    else if (btn === "scroll-to-top") {
@@ -130,6 +137,42 @@ function injectButtons(buttons, position, layout) {
     
     document.body.appendChild(container);
 }
+
+function autoClosePocketWindow(newWindow){
+if (newWindow) {
+    let closeTimer;
+
+    // 重置計時器的函式
+    const resetCloseTimer = () => {
+        if (closeTimer) clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+            if (newWindow && !newWindow.closed) {
+                newWindow.close();
+                console.log("長時間未操作，自動關閉視窗");
+            }
+        }, 10000); // 10 秒後關閉
+    };
+
+    // 監聽使用者操作
+    const addEventListeners = () => {
+        newWindow.addEventListener("mousemove", resetCloseTimer);
+        newWindow.addEventListener("keydown", resetCloseTimer);
+        newWindow.addEventListener("click", resetCloseTimer);
+    };
+
+    // 每秒檢查新視窗是否還開著
+    const checkWindow = setInterval(() => {
+        if (!newWindow || newWindow.closed) {
+            clearInterval(checkWindow);
+            console.log("使用者已關閉視窗");
+        }
+    }, 1000);
+
+    setTimeout(addEventListeners, 3000); // 3 秒後開始監聽事件
+    resetCloseTimer(); // 立即啟動計時器
+}
+}
+
 
 function scrollLargestDivTo(direction) {
 	let largestDiv=null;
@@ -191,13 +234,26 @@ function isPageScrollable() {
 
 
 function updateButtonsFromStorage() {
-    browser.storage.local.get(["buttons", "position", "layout"]).then((data) => {
+	console.log('updateButtonsFromStorage...');
+    const buttons = loadButtonConfig();
+	console.log(buttons);
+    browser.storage.sync.get(["buttons", "position", "layout"]).then((data) => {
         injectButtons(
             data.buttons || ["close"],
             data.position || "top-right",
             data.layout || "vertical"
         );
     });
+}
+
+async function loadButtonConfig() {
+    const data = await browser.storage.sync.get(["buttons", "position", "layout"]);
+    console.log('loaded config: ', data);
+    return {
+        buttons: data.buttons || ["close"],  // 預設按鈕
+        position: data.position || "top-right",  // 預設位置
+        layout: data.layout || "vertical"  // 預設排版
+    };
 }
 
 // listen update message from  background 

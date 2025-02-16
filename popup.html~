@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Button Manager</title>
   <link rel="stylesheet" href="popup.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
   <div class="controls">
@@ -14,6 +15,10 @@
       <option value="pocket">Pocket Button</option>
       <option value="home">Home Button</option>
       <option value="duplicate-tab">Duplicate Tab Button</option>
+      <option value="scroll-to-top">Scroll To Top</option>
+      <option value="page-up">Page Up</option>
+      <option value="page-down">Page Down</option>
+      <option value="scroll-to-bottom">Scroll To Bottom</option>
       <!--@1. add new button-->
     </select>
     <button id="add-button">&#10133;</button>
@@ -38,6 +43,13 @@
       <label><input type="radio" name="layout" value="horizontal"> Horizontal</label>
     </div>
     <button id="apply-button">APPLY</button>
+<a href="https://showclosetabbutton.github.io/help.html" target="_blank">
+    <button id="help-button"class="other-button"><span class="fa fa-question-circle"></span>  Help</button>
+</a>
+<a href="https://paypal.me/zhihaushiu" target="_blank">
+    <button id="donate-button"class="other-button"><span class="fa fa-heart"></span>  Donate</button>
+</a>
+
   </div>
   
   <script src="popup.js"></script>
